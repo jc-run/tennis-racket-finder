@@ -12,6 +12,7 @@ import FilterChipsClient from '@/components/rackets/FilterChipsClient';
 import RacketList from '@/components/rackets/RacketList';
 import PaginationClient from '@/components/rackets/PaginationClient';
 import { get_all_brands } from '@/lib/repositories/brand-repository';
+import type { Racket } from '@/types/racket';
 
 interface BrandPageProps {
   params: Promise<{
@@ -105,7 +106,7 @@ export default async function BrandPage({ params, searchParams }: BrandPageProps
   const page_size = 20;
 
   // 브랜드 목록 (필터 사이드바용)
-  let brands = [];
+  let brands: any[] = [];
   try {
     brands = await get_all_brands();
   } catch (error) {
@@ -113,7 +114,7 @@ export default async function BrandPage({ params, searchParams }: BrandPageProps
   }
 
   // 라켓 데이터 페칭
-  let rackets_data = { data: [], count: 0 };
+  let rackets_data: { data: Racket[]; count: number } = { data: [], count: 0 };
   let rackets_error: string | null = null;
 
   try {

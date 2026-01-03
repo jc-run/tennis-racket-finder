@@ -34,7 +34,7 @@ export default function UserCommentsList({
       </h2>
 
       <div className="space-y-4">
-        {comments.map((comment) => {
+        {comments.map((comment: any) => {
           const racket = comment.rackets as any;
           const brand = racket?.brands as any;
 

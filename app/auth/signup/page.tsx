@@ -1,5 +1,6 @@
 // 회원가입 페이지
 
+import { Suspense } from 'react';
 import Link from 'next/link';
 import SignupForm from '@/components/auth/SignupForm';
 
@@ -23,7 +24,9 @@ export default function SignupPage() {
         </div>
 
         <div className="bg-white rounded-lg shadow-md border border-gray-200 p-8">
-          <SignupForm />
+          <Suspense fallback={<div>로딩 중...</div>}>
+            <SignupForm />
+          </Suspense>
         </div>
 
         <div className="text-center">

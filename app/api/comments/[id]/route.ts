@@ -9,10 +9,10 @@ import { get_user_id_from_request } from '@/lib/utils/get-user-from-request';
  */
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const body = await request.json();
     const { content } = body;
 
@@ -39,8 +39,6 @@ export async function PUT(
     const supabase_url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
     const supabase_key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
     const supabase_server = createClient(supabase_url, supabase_key);
-
-    const body = await request.json();
 
     // 댓글 소유권 확인
     const { data: comment } = await supabase_server
@@ -97,10 +95,10 @@ export async function PUT(
  */
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     // 인증 확인
     const user_id = await get_user_id_from_request();

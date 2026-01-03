@@ -16,9 +16,13 @@ export async function get_user_id_from_request(): Promise<string | null> {
 
     const cookie_store = await cookies();
     const supabase = createClient(supabase_url, supabase_anon_key, {
-      cookies: {
-        get(name: string) {
-          return cookie_store.get(name)?.value;
+      auth: {
+        storage: {
+          getItem: (name: string) => {
+            return cookie_store.get(name)?.value || null;
+          },
+          setItem: () => {},
+          removeItem: () => {},
         },
       },
     });
@@ -37,5 +41,21 @@ export async function get_user_id_from_request(): Promise<string | null> {
     console.error('사용자 인증 오류:', error);
     return null;
   }
+}
+
+/**
+ * API 요청에서 현재 사용자 정보를 가져옴
+ * 
+ * @param request - NextRequest 객체
+ * @returns 사용자 정보 또는 null
+ */
+export async function get_user_from_request(
+  request: Request
+): Promise<{ id: string } | null> {
+  const user_id = await get_user_id_from_request();
+  if (!user_id) {
+    return null;
+  }
+  return { id: user_id };
 }
 

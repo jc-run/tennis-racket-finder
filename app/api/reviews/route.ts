@@ -2,8 +2,9 @@
 // 리뷰 작성 및 조회
 
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase/client';
 import { createClient } from '@supabase/supabase-js';
+import { get_user_id_from_request } from '@/lib/utils/get-user-from-request';
+import { with_rate_limit } from '@/lib/utils/rate-limit';
 
 /**
  * 리뷰 작성 (POST)

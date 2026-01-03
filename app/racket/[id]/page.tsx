@@ -106,7 +106,7 @@ export default async function RacketDetailPage({
   });
 
   // 리뷰 데이터 페칭
-  let reviews = [];
+  let reviews: any[] = [];
   let review_stats = {
     average_rating: 0,
     total_reviews: 0,
@@ -122,7 +122,7 @@ export default async function RacketDetailPage({
   }
 
   // 댓글 데이터 페칭
-  let comments = [];
+  let comments: any[] = [];
   try {
     comments = await get_comments_by_racket_id(id);
   } catch (error) {

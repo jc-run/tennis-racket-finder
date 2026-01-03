@@ -14,7 +14,7 @@ interface RatingStarsProps {
  * @param size - 별표 크기
  * @param show_number - 평점 숫자 표시 여부
  */
-export default function RatingStars({
+export function RatingStars({
   rating,
   size = 'md',
   show_number = false,
@@ -88,4 +88,6 @@ export default function RatingStars({
     </div>
   );
 }
+
+export default RatingStars;
 

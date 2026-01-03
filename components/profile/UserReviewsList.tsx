@@ -35,7 +35,7 @@ export default function UserReviewsList({
       </h2>
 
       <div className="space-y-4">
-        {reviews.map((review) => {
+        {reviews.map((review: any) => {
           const racket = review.rackets as any;
           const brand = racket?.brands as any;
 

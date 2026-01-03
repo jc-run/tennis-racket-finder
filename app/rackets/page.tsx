@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 import { get_all_brands } from '@/lib/repositories/brand-repository';
 import { get_rackets } from '@/lib/repositories/racket-repository';
 import { parse_filters_from_url } from '@/lib/utils/filter-utils';
+import type { Racket } from '@/types/racket';
 import FilterSidebarClient from '@/components/rackets/filters/FilterSidebarClient';
 import FilterChipsClient from '@/components/rackets/FilterChipsClient';
 import RacketList from '@/components/rackets/RacketList';
@@ -51,7 +52,7 @@ export default async function RacketsPage({ searchParams }: RacketsPageProps) {
   const filters = parse_filters_from_url(url_search_params);
 
   // 브랜드 데이터 페칭
-  let brands = [];
+  let brands: any[] = [];
   try {
     brands = await get_all_brands();
   } catch (error) {
@@ -59,7 +60,7 @@ export default async function RacketsPage({ searchParams }: RacketsPageProps) {
   }
 
   // 라켓 데이터 페칭
-  let rackets_data = { data: [], count: 0 };
+  let rackets_data: { data: Racket[]; count: number } = { data: [], count: 0 };
   let rackets_error: string | null = null;
 
   try {

@@ -14,7 +14,7 @@ import { ErrorMessage } from '@/components/ui';
  * - 물음표 라켓 클릭 시 /rackets로 이동
  */
 export default async function HomePage() {
-  let brands = [];
+  let brands: any[] = [];
   let error: string | null = null;
 
   // 브랜드 데이터 페칭
